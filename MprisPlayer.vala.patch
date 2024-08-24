@@ -1,0 +1,21 @@
+--- a/src/Mpris/MprisPlayer.vala	2024-08-23 23:40:30.783236101 -0500
++++ b/src/Mpris/MprisPlayer.vala	2024-08-23 23:50:32.597257533 -0500
+@@ -63,12 +63,16 @@
+ 
+         var new_song = new Lyrics.Metasong.from_metadata (metadata);
+ 
+-        if (current_song?.to_string () == new_song?.to_string ()) {
++        if (current_song != null && new_song != null && current_song.to_string() == new_song.to_string()) {
+             return;
+         }
+ 
+         current_song = new_song;
+-        debug(current_song?.to_string ());
++	if (current_song != null) {
++	    debug(current_song.to_string());
++	} else {
++	    debug("current_song is null");
++        }
+     }
+ 
+     void update_state () {

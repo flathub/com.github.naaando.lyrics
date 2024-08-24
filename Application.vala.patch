@@ -1,10 +1,10 @@
---- a/src/Application.vala	2019-03-17 03:17:41.000000000 +0100
-+++ b/src/Application.vala	2019-10-11 21:54:49.258301739 +0200
-@@ -35,6 +35,10 @@
-         players.on_active_player_changed.connect (() => display_view.on_player_change (players.active_player));
+--- a/src/Application.vala	2024-08-24 07:08:36.260090570 -0500
++++ b/src/Application.vala	2024-08-24 07:15:08.053104523 -0500
+@@ -36,6 +36,10 @@
+         lyrics_service.notify["lyric"].connect (() => display_view.set_lyric (lyrics_service.lyric));
  
          var main_window = new MainWindow (this, players, main_stack);
-+         
++ 
 +        Gtk.Settings.get_default().set_property("gtk-theme-name", "elementary");
 +        Gtk.Settings.get_default().set_property("gtk-icon-theme-name", "elementary");
 +

@@ -1,17 +1,17 @@
 {
     "app-id": "com.github.naaando.lyrics",
     "base": "io.elementary.BaseApp",
-    "base-version": "juno-19.08",
+    "base-version": "juno-23.08",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "19.08",
+    "runtime-version": "23.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "com.github.naaando.lyrics",
     "finish-args": [
-        "--socket=x11",
+        "--persist=.lyrics",
         "--socket=wayland",
-        "--socket=session-bus",
+        "--socket=fallback-x11",
+        "--talk-name=org.mpris.MediaPlayer2.*",
         "--share=ipc",
-        "--share=network",
         "--metadata=X-DConf=migrate-path=/com/github/naaando/lyrics/"
     ],
     "modules": [
@@ -27,8 +27,20 @@
             "sources": [
                 {
                     "type":"archive",
-                    "url":"https://birdfont.org/xmlbird-releases/libxmlbird-1.2.10.tar.xz",
-                    "sha256":"e8b0d4984fc55865bbd60b67c8facfe1b3e7d0c8da7df665084772d230bef862"
+                    "url":"http://birdfont.org/xmlbird-releases/libxmlbird-1.2.15.tar.xz",
+                    "sha256":"f065f88a317e031686185952c513ce02851ecd11bae7dda33ab89fcff9964d13"
+                }
+            ]
+        },
+        {
+            "name": "libsoup",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                   "type":"git",
+                   "url":"https://gitlab.gnome.org/GNOME/libsoup.git",
+                   "tag":"2.74.1",
+                   "commit":"0e1d3eee74cc568aa077b3472e7fcd3f13d42007"
                 }
             ]
         },
@@ -40,15 +52,21 @@
             ],
             "sources": [
                 {
-                   "type":"archive",
-                   "url":"https://github.com/naaando/lyrics/archive/0.8.1.tar.gz",
-                   "sha256":"6a990f7127e684fabb0032cbb7d5ff66155f622e979b106d6ba03ffd2fc84a74"
+                   "type":"git",
+                   "url":"https://github.com/naaando/lyrics.git",
+                   "tag":"0.9.0",
+                   "commit":"557f0007e71338efa39140a406981ef8cdc417ae"
                 },
                 {
-                    "type": "patch",
-                    "path": "eos-theme.patch"
+                   "type":"patch",
+                   "path":"MprisPlayer.vala.patch"
+                },
+                {
+                   "type":"patch",
+                   "path":"Application.vala.patch"
                 }
             ]
         }
     ]
 }
+
