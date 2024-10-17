@@ -1,52 +1,85 @@
 {
     "app-id": "com.github.naaando.lyrics",
-    "base": "io.elementary.BaseApp",
-    "base-version": "juno-19.08",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "19.08",
+    "runtime-version": "24.08",
     "sdk": "org.freedesktop.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.vala"
+    ],
+    "build-options": {
+        "prepend-path": "/usr/lib/sdk/vala/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/vala/lib"
+    },
     "command": "com.github.naaando.lyrics",
     "finish-args": [
-        "--socket=x11",
         "--socket=wayland",
-        "--socket=session-bus",
+        "--socket=fallback-x11",
         "--share=ipc",
         "--share=network",
+        "--talk-name=org.mpris.MediaPlayer2.*",
         "--metadata=X-DConf=migrate-path=/com/github/naaando/lyrics/"
     ],
+    "cleanup": [
+        "/bin/distro",
+        "/bin/normalizer"
+    ],
     "modules": [
-        "python3-doit.json",
+        "python3-skbuild.json",
+        "pypi-dependencies.json",
         {
-            "name": "xmlbird",
-            "buildsystem": "simple",
-            "build-commands": [
-                "./configure --prefix=/app --libdir=/lib",
-                "doit",
-                "./install.py"
-            ],
+            "name": "libgee",
+            "build-options": {
+                "cflags": "-Wno-error=incompatible-pointer-types"
+            },
             "sources": [
                 {
-                    "type":"archive",
-                    "url":"https://birdfont.org/xmlbird-releases/libxmlbird-1.2.10.tar.xz",
-                    "sha256":"e8b0d4984fc55865bbd60b67c8facfe1b3e7d0c8da7df665084772d230bef862"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.6.tar.xz",
+                    "sha256": "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d",
+                    "x-checker-data": {
+                        "type": "gnome",
+                        "name": "libgee",
+                        "stable-only": true
+                    }
                 }
+            ],
+            "cleanup": [
+                "/include",
+                "/lib/girepository-1.0",
+                "/lib/pkgconfig",
+                "/lib/*.la",
+                "/share"
             ]
         },
         {
             "name": "lyrics",
             "buildsystem": "meson",
             "config-opts": [
-              "--buildtype=release"
+                "--buildtype=release"
             ],
             "sources": [
                 {
-                   "type":"archive",
-                   "url":"https://github.com/naaando/lyrics/archive/0.8.1.tar.gz",
-                   "sha256":"6a990f7127e684fabb0032cbb7d5ff66155f622e979b106d6ba03ffd2fc84a74"
+                    "type": "archive",
+                    "dest-filename": "lyrics.tar.gz",
+                    "url": "https://api.github.com/repos/naaando/lyrics/tarball/0.9.0",
+                    "sha256": "bb287bb52140f7cd3966d684474d9ccb4b5cb0c6e361b11be951aeb229c6fa36",
+                    "x-checker-data": {
+                        "type": "json",
+                        "url": "https://api.github.com/repos/naaando/lyrics/releases/latest",
+                        "version-query": ".tag_name",
+                        "url-query": ".tarball_url"
+                    }
                 },
                 {
                     "type": "patch",
-                    "path": "eos-theme.patch"
+                    "paths": [
+                        "patches/0001-Don-t-hardcode-the-path-to-syncedlyrics.patch",
+                        "patches/0002-Don-t-run-pip-install-when-the-app-starts.patch",
+                        "patches/0003-Save-lyrics-to-XDG_DATA_HOME-lyrics.patch",
+                        "patches/0004-Install-only-the-SVG-app-icon-and-to-the-right-locat.patch",
+                        "patches/0005-Fix-issues-in-AppStream-metadata.patch",
+                        "patches/0006-Drop-unused-libsoup-and-xmlbird-dependencies.patch"
+                    ]
                 }
             ]
         }

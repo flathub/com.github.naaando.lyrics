@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: guihkx <626206+guihkx@users.noreply.github.com>
+Date: Fri, 18 Oct 2024 04:43:50 -0300
+Subject: Don't run pip install when the app starts
+
+All project dependencies were already installed at build time.
+---
+ src/Application.vala | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/Application.vala b/src/Application.vala
+index 7cc482a..e35e54d 100644
+--- a/src/Application.vala
++++ b/src/Application.vala
+@@ -60,7 +60,6 @@ public class Lyrics.Application : Gtk.Application {
+ 
+     private void setup_services () {
+         var syncedLyrics = new SyncedLyrics.Shim();
+-        syncedLyrics.install();
+ 
+         lyrics_service = new LyricsService ();
+         players = new Players ();
+-- 
+2.47.0
+
