@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: guihkx <626206+guihkx@users.noreply.github.com>
+Date: Fri, 18 Oct 2024 16:48:10 -0300
+Subject: Drop unused libsoup and xmlbird dependencies
+
+These are not required as of 0.9.0, when the previous lyrics provider
+was dropped in favor of syncedlyrics.
+---
+ meson.build | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 615a722..fcf2a2c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -22,8 +22,6 @@ executable(
+         dependency ('glib-2.0'),
+         dependency ('gtk+-3.0'),
+         dependency ('gee-0.8'),
+-        dependency ('libsoup-2.4'),
+-        dependency ('xmlbird'),
+     ],
+     install: true
+ )
+-- 
+2.47.0
+

@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: guihkx <626206+guihkx@users.noreply.github.com>
+Date: Fri, 18 Oct 2024 13:00:41 -0300
+Subject: Install only the SVG app icon and to the right location
+
+---
+ data/meson.build | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/data/meson.build b/data/meson.build
+index 5a3ceca..f24b7b9 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -1,15 +1,7 @@
+-icon_sizes = ['16', '24', '32', '48', '64', '128']
+-
+-foreach i : icon_sizes
+-    install_data (
+-        join_paths ('icons', i, meson.project_name () + '.svg'),
+-        install_dir: join_paths (get_option ('datadir'), 'icons', 'hicolor', i + 'x' + i, 'apps')
+-    )
+-    install_data (
+-        join_paths ('icons', i, meson.project_name () + '.svg'),
+-        install_dir: join_paths (get_option ('datadir'), 'icons', 'hicolor', i + 'x' + i + '@2', 'apps')
+-    )
+-endforeach
++install_data (
++    join_paths ('icons', '16', meson.project_name () + '.svg'),
++    install_dir: join_paths (get_option ('datadir'), 'icons', 'hicolor', 'scalable', 'apps')
++)
+ 
+ install_data (
+     meson.project_name () + '.gschema.xml',
+-- 
+2.47.0
+

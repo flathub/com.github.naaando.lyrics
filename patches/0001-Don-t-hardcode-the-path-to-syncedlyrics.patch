@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: guihkx <626206+guihkx@users.noreply.github.com>
+Date: Fri, 18 Oct 2024 04:32:38 -0300
+Subject: Don't hardcode the path to syncedlyrics
+
+---
+ src/SyncedLyrics/Shim.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/SyncedLyrics/Shim.vala b/src/SyncedLyrics/Shim.vala
+index 064c324..348f345 100644
+--- a/src/SyncedLyrics/Shim.vala
++++ b/src/SyncedLyrics/Shim.vala
+@@ -34,7 +34,7 @@ public class SyncedLyrics.Shim : Object {
+         var path = app_local_storage + filename;
+ 
+         Process.spawn_command_line_sync (
+-            @"$(Lyrics.Application.DEFAULT_LYRICS_DIR).venv/bin/syncedlyrics -o \"$(path)\" \"$(search_terms)\"",
++            @"syncedlyrics -o \"$(path)\" \"$(search_terms)\"",
+             out stdout,
+             out stderr,
+             out status
+-- 
+2.47.0
+
