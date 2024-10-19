@@ -75,7 +75,7 @@
                     "paths": [
                         "patches/0001-Don-t-hardcode-the-path-to-syncedlyrics.patch",
                         "patches/0002-Don-t-run-pip-install-when-the-app-starts.patch",
-                        "patches/0003-Save-lyrics-to-XDG_DATA_HOME-lyrics.patch",
+                        "patches/0003-Save-lyrics-to-XDG_DATA_HOME-APP_ID-lyrics.patch",
                         "patches/0004-Install-only-the-SVG-app-icon-and-to-the-right-locat.patch",
                         "patches/0005-Fix-issues-in-AppStream-metadata.patch",
                         "patches/0006-Drop-unused-libsoup-and-xmlbird-dependencies.patch"
