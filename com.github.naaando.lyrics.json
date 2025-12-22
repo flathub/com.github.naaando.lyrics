@@ -1,7 +1,7 @@
 {
     "app-id": "com.github.naaando.lyrics",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "24.08",
+    "runtime-version": "25.08",
     "sdk": "org.freedesktop.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.vala"
@@ -20,42 +20,37 @@
         "--metadata=X-DConf=migrate-path=/com/github/naaando/lyrics/"
     ],
     "cleanup": [
-        "/bin/distro",
-        "/bin/normalizer"
+        "/bin/normalizer",
+        "/include",
+        "/lib/girepository-1.0",
+        "/lib/pkgconfig",
+        "/share/gir-1.0",
+        "/share/vala",
+        "*.la",
+        "*.a"
     ],
     "modules": [
-        "python3-skbuild.json",
         "pypi-dependencies.json",
         {
             "name": "libgee",
-            "build-options": {
-                "cflags": "-Wno-error=incompatible-pointer-types"
-            },
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.6.tar.xz",
-                    "sha256": "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d",
+                    "url": "https://download.gnome.org/sources/libgee/0.20/libgee-0.20.8.tar.xz",
+                    "sha256": "189815ac143d89867193b0c52b7dc31f3aa108a15f04d6b5dca2b6adfad0b0ee",
                     "x-checker-data": {
                         "type": "gnome",
                         "name": "libgee",
                         "stable-only": true
                     }
                 }
-            ],
-            "cleanup": [
-                "/include",
-                "/lib/girepository-1.0",
-                "/lib/pkgconfig",
-                "/lib/*.la",
-                "/share"
             ]
         },
         {
             "name": "lyrics",
             "buildsystem": "meson",
             "config-opts": [
-                "--buildtype=release"
+                "-Dbuildtype=release"
             ],
             "sources": [
                 {
@@ -64,6 +59,7 @@
                     "url": "https://api.github.com/repos/naaando/lyrics/tarball/0.9.0",
                     "sha256": "bb287bb52140f7cd3966d684474d9ccb4b5cb0c6e361b11be951aeb229c6fa36",
                     "x-checker-data": {
+                        "is-main-source": true,
                         "type": "json",
                         "url": "https://api.github.com/repos/naaando/lyrics/releases/latest",
                         "version-query": ".tag_name",
