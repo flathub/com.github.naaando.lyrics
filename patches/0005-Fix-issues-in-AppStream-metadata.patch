@@ -111,6 +111,7 @@ index f642179..1e40974 100644
    <developer_name>Fernando da Silva Sousa</developer_name>
    <url type="homepage">https://github.com/naaando/lyrics</url>
    <url type="bugtracker">https://github.com/naaando/lyrics/issues</url>
++  <url type="vcs-browser">https://github.com/naaando/lyrics</url>
 -- 
 2.47.0
 
