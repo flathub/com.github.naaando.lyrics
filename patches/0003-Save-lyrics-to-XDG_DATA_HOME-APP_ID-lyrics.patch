@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: guihkx <626206+guihkx@users.noreply.github.com>
+Date: Fri, 18 Oct 2024 05:06:18 -0300
+Subject: Save lyrics to $XDG_DATA_HOME/$APP_ID/lyrics
+
+---
+ src/Application.vala           | 2 +-
+ src/Repository/Repository.vala | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Application.vala b/src/Application.vala
+index 7cc482a..0eb5e7d 100644
+--- a/src/Application.vala
++++ b/src/Application.vala
+@@ -1,6 +1,6 @@
+ 
+ public class Lyrics.Application : Gtk.Application {
+-    public static string DEFAULT_LYRICS_DIR = Environment.get_home_dir ()+"/.lyrics/";
++    public static string DEFAULT_LYRICS_DIR = Environment.get_user_data_dir () + "/com.github.naaando.lyrics/lyrics/";
+     public static GLib.Settings settings = new Settings ("com.github.naaando.lyrics");
+     public LyricsService lyrics_service { get; set; }
+ 
+diff --git a/src/Repository/Repository.vala b/src/Repository/Repository.vala
+index 44f0a50..35dc8cb 100644
+--- a/src/Repository/Repository.vala
++++ b/src/Repository/Repository.vala
+@@ -46,7 +46,7 @@ public class Lyrics.Repository : IRepository, Object {
+ 
+     void configure_download_local () {
+         var settings_location = Application.settings.get_string ("download-location");
+-        local_repository.local_storage = settings_location == "" ? Environment.get_home_dir ()+"/.lyrics/" : settings_location+"/";
++        local_repository.local_storage = settings_location == "" ? Environment.get_user_data_dir ()+"/com.github.naaando.lyrics/lyrics/" : settings_location+"/";
+         debug ("Setting local storage to " + local_repository.local_storage);
+     }
+ }
+-- 
+2.47.0
+
