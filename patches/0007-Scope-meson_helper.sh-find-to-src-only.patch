@@ -1,0 +1,14 @@
+
+---
+ meson_helper.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson_helper.sh b/meson_helper.sh
+index ebda370..5f4588c 100644
+--- a/meson_helper.sh
++++ b/meson_helper.sh
+@@ -1,3 +1,3 @@
+ #!/bin/sh
+ 
+-find ./ -type f -name "*.vala"
++find ./src -type f -name "*.vala"

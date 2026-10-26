@@ -1,7 +1,7 @@
 {
     "app-id": "com.github.naaando.lyrics",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "25.08",
+    "runtime-version": "26.08",
     "sdk": "org.freedesktop.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.vala"
@@ -74,7 +74,8 @@
                         "patches/0003-Save-lyrics-to-XDG_DATA_HOME-lyrics.patch",
                         "patches/0004-Install-only-the-SVG-app-icon-and-to-the-right-locat.patch",
                         "patches/0005-Fix-issues-in-AppStream-metadata.patch",
-                        "patches/0006-Drop-unused-libsoup-and-xmlbird-dependencies.patch"
+                        "patches/0006-Drop-unused-libsoup-and-xmlbird-dependencies.patch",
+                        "patches/0007-Scope-meson_helper.sh-find-to-src-only.patch"
                     ]
                 }
             ]
